@@ -7,7 +7,7 @@ void main() {
 class StudentProfile extends StatelessWidget {
   const StudentProfile({super.key});
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     const String name = "Duangkamon Chaithongsri";
