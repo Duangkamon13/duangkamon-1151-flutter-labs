@@ -1,14 +1,17 @@
-/* A custom widget QuoteCard
-This widget display quote image and the author's name
-which take the full space vertically.
+/* A custom widget QuoteCard.
+   This widget sets up the UI theme and renders the quote image above
+   the author's name, with both elements sharing the vertical space.
 
 AI Documentation
-   1. AI Tool: Gemini
+   1. AI Tool: Gemini 3 Pro
    2. Prompt: What are common TextStyle properties and how to declare a variable for text styling?
    3. Prompt answer analysis and application:
     - The AI listed common properties such as fontSize, fontWeight, color , etc.
     - It suggested creating variables to organize the styles.
     - I applied this by creating a 'nameStyle' variable and using it for both the First Name and Last Name widgets.
+
+VERIFICATION:
+Run App (Checked that the app compiles and the UI renders with the correct styles).
 
 @author Duangkamon Chaithongsri
 @version 1.0.0

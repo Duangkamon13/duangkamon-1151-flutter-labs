@@ -1,7 +1,7 @@
-/* A custom widget QuoteCard with Container
-  This widget display quote image and the author's name
-  In both container that is decorated with BoxDecoration with rounded
-  corner
+/* A wrapper widget 'QuoteContainerCard' for displaying a quote content.
+   It renders an asset image followed by the author's name (First and Last name).
+   The text elements are wrapped inside a decorated Container with rounded corners
+   and drop shadows to create a card-like appearance.
 
   AI Documentation
   AI Tool: Gemini 3 Pro
@@ -10,6 +10,9 @@
   - The AI confirmed that declaring a constant color variable is a good practice (DRY principle).
   - It suggested placing the variable inside the build method or class to make the code cleaner and easier to maintain.
   - I applied this by creating a 'redColor' variable and using it for both the Text style and AppBar background.
+
+  VERIFICATION:
+  Manually tested on a device. The UI renders correctly: the custom 'redColorRGB' is applied
 
 @author Duangkamon Chaithongsri
 @version 1.0.0
@@ -29,12 +32,20 @@ class QuoteContainerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     const String Fname = "Charles";
     const String Lname = "Leclerc";
+    const Color redColorRGB = Color.fromARGB(250, 133, 14, 53);
     const TextStyle nameStyle = TextStyle(
       fontSize: 30,
       fontWeight: FontWeight.bold,
       color: Color.fromARGB(250, 133, 14, 53),
     );
-    const Color redColorRGB = Color.fromARGB(250, 133, 14, 53);
+    BoxDecoration containerDec = BoxDecoration(color: Colors.amber[400],
+        border: Border.all(color: redColorRGB, width: 2.0),
+        boxShadow: [
+          BoxShadow(blurRadius: 5, offset: const Offset(0, 9)),
+        ],
+        borderRadius: BorderRadius.circular(25));
+
+    /////////////////////////////////////////////////////////////////////
     return MaterialApp(
       title: "QuoteCard",
       theme: ThemeData(
@@ -69,14 +80,7 @@ class QuoteContainerCard extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                 padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.amber[400],
-                  border: Border.all(color: redColorRGB, width: 2.0),
-                  boxShadow: [
-                    BoxShadow(blurRadius: 5, offset: const Offset(0, 9)),
-                  ],
-                  borderRadius: BorderRadius.circular(25),
-                ),
+                decoration: containerDec,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
