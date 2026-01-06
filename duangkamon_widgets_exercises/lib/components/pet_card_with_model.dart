@@ -20,7 +20,7 @@
 */
 
 import 'package:flutter/material.dart';
-import 'package:duangkamon_widgets_exercises/models/pet_model.dart';
+import '../models/pet_model.dart';
 
 class PetCardWithModel extends StatelessWidget {
   final PetModel pet;

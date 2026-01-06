@@ -4,12 +4,18 @@
 
   AI Documentation
   AI Tool: Gemini 3 Pro
-  Prompt: "How do I make the content go to the center? Why does mainAxisAlignment.center not work with Expanded?"
+  Prompt1: "How do I make the content go to the center? Why does mainAxisAlignment.center not work with Expanded?"
   Prompt answer analysis and application:
   - The AI explained that using 'Expanded' inside a Column can force children to take up all available vertical space, preventing 'MainAxisAlignment.center' from working effectively in some contexts.
   - It recommended wrapping the entire main Column with a 'Center' widget to ensure the grid floats in the middle of the screen.
   - It also suggested wrapping individual PetCardWithModel widgets with 'Center' inside the 'Expanded' widgets to prevent them from stretching unnaturally.
   - I applied these layout fixes to achieve the desired centered 2x2 grid appearance.
+
+ Prompt 2: "How do I call PetModel to input data like names?"
+  Prompt answer analysis and application:
+  - The AI explained that 'PetCardWithModel' requires an instance of the 'PetModel' class passed to its 'pet' parameter.
+  - It demonstrated how to instantiate the model directly inside the widget call: PetModel(name: '...', imageURL: '...').
+  - I applied this by creating specific PetModel objects for the Bird, Dog, Cat, and Rabbit, passing their unique data to each card.
 
   VERIFICATION:
   Ran the app on an emulator. The 2x2 grid is now perfectly centered on the screen, and the cards maintain their correct aspect ratio without distortion.
@@ -20,8 +26,8 @@
 */
 
 import 'package:flutter/material.dart';
-import 'package:duangkamon_widgets_exercises/components/pet_card_with_model.dart';
-import 'package:duangkamon_widgets_exercises/models/pet_model.dart';
+import '../components/pet_card_with_model.dart';
+import '../models/pet_model.dart';
 
 class PetsGalleryScreen extends StatelessWidget {
   const PetsGalleryScreen({super.key});
