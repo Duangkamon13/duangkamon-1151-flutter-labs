@@ -55,6 +55,7 @@ flutter:
   assets:
     - assets/images/Quote.jpg
     - assets/images/kku.jpg
+    - assets/images/shinchan.jpg
 
   fonts:
     - family: K2D

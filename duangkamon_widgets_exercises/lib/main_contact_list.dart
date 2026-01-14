@@ -3,6 +3,9 @@
    that supports both Light and Dark modes based on the system setting.
    It loads the 'ContactListScreen' as the home page.
 
+   AI Documentation
+   AI Tool: I don't use any AI tools.
+
   @author Duangkamon Chaithongsri
   @version 1.0.0
   @date 2026-01-07
