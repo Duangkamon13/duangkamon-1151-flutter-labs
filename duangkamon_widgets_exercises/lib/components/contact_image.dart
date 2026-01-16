@@ -11,9 +11,16 @@
    - Values range from -1.0 to 1.0. The value (0.5, 0.6) means shifting right by 50% and down by 60%.
    - I used 'Alignment(0.5, 0.6)' to position the name tag slightly off-center towards the bottom-right, similar to the lab example.
 
+   Prompt 2 (Lab 6 Update): "How to fix the image looking squeezed or too large in landscape mode?"
+   Prompt answer analysis and application:
+   - The AI suggested using the 'FittedBox' widget instead of hardcoding the radius.
+   - I wrapped the Stack with 'FittedBox(fit: BoxFit.scaleDown)'.
+   - This ensures the image automatically scales down to fit the available space in the landscape layout without distortion, fulfilling the responsive requirement.
+
    @author Duangkamon Chaithongsri
-   @version 1.0.0
-   @date 2026-01-14
+   @version 1.1.0 (Updated for Lab 6.1)
+   @date 2026-01-15
+
 */
 
 import 'package:flutter/material.dart';
@@ -25,23 +32,30 @@ class ContactImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment(0.5, 0.6),
-      children: [
-        CircleAvatar(backgroundImage: AssetImage(imagePath), radius: 140),
-        Container(
-          padding: EdgeInsets.all(5),
-          decoration: BoxDecoration(color: Colors.black),
-          child: Text(
-            name,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+
+    return FittedBox(
+      fit: BoxFit.fill,
+      child: Stack(
+        alignment: Alignment(0.5, 0.6),
+        children: [
+          CircleAvatar(
+            backgroundImage: AssetImage(imagePath),
+            radius: 140,
+          ),
+          Container(
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(color: Colors.black),
+            child: Text(
+              name,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
