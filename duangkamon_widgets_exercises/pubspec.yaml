@@ -56,6 +56,18 @@ flutter:
     - assets/images/Quote.jpg
     - assets/images/kku.jpg
     - assets/images/shinchan.jpg
+    - assets/images/faculties/en.jpg
+    - assets/images/faculties/med.jpg
+    - assets/images/faculties/arch.jpg
+    - assets/images/products/book.jpg
+    - assets/images/products/headphone.jpg
+    - assets/images/products/keyboard.jpg
+    - assets/images/products/laptop.jpg
+    - assets/images/products/mouse.jpg
+    - assets/images/products/speaker.jpg
+    - assets/images/products/watch.jpg
+
+
 
   fonts:
     - family: K2D
