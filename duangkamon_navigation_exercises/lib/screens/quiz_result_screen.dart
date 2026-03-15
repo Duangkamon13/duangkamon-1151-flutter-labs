@@ -41,7 +41,7 @@
   --------------------------------------------------
 
   @author Duangkamon Chaithongsri
-  @version 3.1.0
+  @version 3.2.0
   @date 2026-03-10
 */
 
@@ -61,125 +61,145 @@ class QuizResultScreen extends StatelessWidget {
     required this.totalScore,
     required this.onRestart,
   });
-
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30),
-            child: Center(
-              child: Container(
-                width: 200,
-                height: 150,
-                decoration: BoxDecoration(
-                  color: colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Your Score",
-                      style: textTheme.titleLarge?.copyWith(
-                        color: colorScheme.onPrimaryContainer,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      "$totalScore / ${questions.length}",
-                      style: textTheme.displayMedium?.copyWith(
-                        color: colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+    final colorScheme = Theme
+        .of(context)
+        .colorScheme;
+    final textTheme = Theme
+        .of(context)
+        .textTheme;
 
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              itemCount: questions.length,
-              itemBuilder: (context, index) {
-                final question = questions[index];
-                final userPick = selectedAnswers[index];
-                final correctIdx = question.choices.indexWhere((c) => c.isCorrect);
-                final correctChoice = question.choices[correctIdx];
-                String feedback;
-                Color textColor;
-                if (userPick == null) {
-                  feedback = "Not answered - Correct: ${correctChoice.name}";
-                  textColor = Colors.orange;
-                } else if (userPick == correctIdx) {
-                  feedback = "${correctChoice.name} ✓";
-                  textColor = Colors.green;
-                } else {
-                  feedback =
-                      "${question.choices[userPick].name} ✗ Should be ${correctChoice.name}";
-                  textColor = Colors.red;
-                }
-                return Card(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  elevation: 0,
-                  color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 50, bottom: 30),
+              child: Center(
+                child: Container(
+                  width: 200,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
                   ),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    leading: CircleAvatar(
-                      backgroundColor: colorScheme.primaryContainer,
-                      child: Text(
-                        "${index + 1}",
-                        style: const TextStyle(
-                          color: Colors.white,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Your Score",
+                        style: textTheme.titleLarge?.copyWith(
+                          color: colorScheme.onPrimaryContainer,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        "$totalScore / ${questions.length}",
+                        style: textTheme.displayMedium?.copyWith(
+                          color: colorScheme.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                itemCount: questions.length,
+                itemBuilder: (context, index) {
+                  final question = questions[index];
+                  final userPick = selectedAnswers[index];
+                  final correctIdx = question.choices.indexWhere((c) =>
+                  c.isCorrect);
+                  final correctChoice = question.choices[correctIdx];
+
+                  String feedback;
+                  Color textColor;
+
+                  if (userPick == null) {
+                    feedback = "Not answered - Correct: ${correctChoice.name}";
+                    textColor = Colors.orange;
+                  } else if (userPick == correctIdx) {
+                    feedback = "${correctChoice.name} ✓";
+                    textColor = Colors.green;
+                  } else {
+                    feedback = "${question.choices[userPick]
+                        .name} ✗ Should be ${correctChoice.name}";
+                    textColor = Colors.red;
+                  }
+
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    elevation: 0,
+                    color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    title: Text(question.title),
-                    subtitle: Text(
-                      feedback,
-                      style: TextStyle(
-                        color: textColor
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      leading: CircleAvatar(
+                        backgroundColor: colorScheme.primaryContainer,
+                        child: Text(
+                          "${index + 1}",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      title: Text(question.title),
+                      subtitle: Text(
+                        feedback,
+                        style: TextStyle(
+                          color: textColor,
+                          fontWeight: FontWeight
+                              .bold, // เพิ่มความหนาให้อ่านง่ายขึ้น
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
 
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: ElevatedButton(
-              onPressed: onRestart,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: colorScheme.primaryContainer,
-                foregroundColor: colorScheme.onPrimaryContainer,
-                minimumSize: const Size(200, 55),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 10, 25, 25),
+              // ปรับระยะห่างปุ่ม
+              child: ElevatedButton(
+                onPressed: onRestart,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colorScheme.primaryContainer,
+                  foregroundColor: colorScheme.onPrimaryContainer,
+                  minimumSize: const Size(200, 55),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  elevation: 2,
                 ),
-                elevation: 2,
-              ),
-              child: const Text(
-                "Restart",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                child: const Text(
+                  "Restart",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
